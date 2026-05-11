@@ -117,45 +117,42 @@
     </div>
   </div>
   <script>
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxmp7cy-kcPPS6qVvDmtYfz4k4koa1mv_23n5UjYgVYwOV6p08KDNeUk2s4gd-FlIwc/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxiEFdSYNn-o0nj2-ZuMjCnTuVNbnM3S5HwigoaKWXdZ9xxG006xIp8IzDx73bhAZDm/exec';
     document.getElementById('orderForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const btn = document.getElementById('submitBtn');
-      btn.disabled = true;
-      btn.innerText = 'অর্ডার হচ্ছে...';
-      const formData = new FormData();
-      formData.append('name', document.getElementById('name').value);
-      formData.append('phone', document.getElementById('phone').value);
-      formData.append('address', document.getElementById('address').value);
-      formData.append('status', document.getElementById('status').value);
-      formData.append('product', 'Diamond Cut Ring'); // এই লাইন যোগ করছি
-      formData.append('price', '449'); // এই লাইন যোগ করছি
-      fetch(SCRIPT_URL, {
-        method: 'POST',
-        body: formData
-      }).then(res => {
-        document.getElementById('orderForm').style.display = 'none';
-        document.getElementById('successMsg').style.display = 'block';
-      }).catch(err => {
-        alert('দুঃখিত, সমস্যা হয়েছে। আবার চেষ্টা করুন।');
-        btn.disabled = false;
-        btn.innerText = '📱 Order Now';
-      });
-    });
-    let slideIndex = 1;
-    showSlides(slideIndex);
-    function moveSlide(n) { showSlides(slideIndex += n); }
-    function currentSlide(n) { showSlides(slideIndex = n); }
-    function showSlides(n) {
-      let slides = document.getElementsByClassName("slide");
-      let dots = document.getElementsByClassName("dot");
-      if (n > slides.length) {slideIndex = 1}
-      if (n < 1) {slideIndex = slides.length}
-      for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
-      for (let i = 0; i < dots.length; i++) { dots[i].className = dots[i].className.replace(" active", ""); }
-      slides[slideIndex-1].style.display = "block";
-      dots[slideIndex-1].className += " active";
-    }
-  </script>
+e.preventDefault();
+const btn = document.getElementById('submitBtn');
+btn.disabled = true;
+btn.innerText = 'অর্ডার হচ্ছে...';
+const formData = new FormData();
+formData.append('name', document.getElementById('name').value);
+formData.append('phone', document.getElementById('phone').value);
+formData.append('address', document.getElementById('address').value);
+formData.append('ringcode', document.getElementById('ringcode').value); // নতুন লাইন
+formData.append('product', 'Diamond Cut Ring');
+formData.append('price', '4,49');
+fetch(SCRIPT_URL, { method: 'POST', body: formData }).then(res => {
+document.getElementById('orderForm').style.display = 'none';
+document.getElementById('successMsg').style.display = 'block';
+}).catch(err => {
+alert('দুঃখিত, সমস্যা হয়েছে। আবার চেষ্টা করুন।');
+btn.disabled = false;
+btn.innerText = '📱 Order Now';
+});
+});
+let slideIndex = 1;
+showSlides(slideIndex);
+function moveSlide(n) { showSlides(slideIndex += n); }
+function currentSlide(n) { showSlides(slideIndex = n); }
+function showSlides(n) {
+let slides = document.getElementsByClassName("slide");
+let dots = document.getElementsByClassName("dot");
+if (n > slides.length) {slideIndex = 1}
+if (n < 1) {slideIndex = slides.length}
+for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+for (let i = 0; i < dots.length; i++) { dots[i].className = dots[i].className.replace(" active", ""); }
+slides[slideIndex-1].style.display = "block";
+dots[slideIndex-1].className += " active";
+}
+</script>
 </body>
 </html>
